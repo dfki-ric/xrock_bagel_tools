@@ -1,0 +1,21 @@
+# Compiled source #
+###################
+*.pyc
+
+# Neglected Folder #
+####################
+bin/__pycache__
+build
+
+# CMAKE #
+#########
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+

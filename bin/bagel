@@ -1,0 +1,87 @@
+#! /usr/bin/env python3.5
+
+from sys import stdout
+
+BOLD = '\033[32;1m'
+WARNING = '\033[38;5;166m'
+ERROR = '\033[31;1m'
+END = '\033[0m'
+
+def printNormal(s):
+    print(s)
+    stdout.flush()
+
+def printBold(s):
+    print(BOLD + s + END)
+    stdout.flush()
+
+def printWarning(s):
+    print(WARNING + s + END)
+    stdout.flush()
+
+def printError(s):
+    print(ERROR + s + END)
+    stdout.flush()
+
+printWarning("\nadd_to_bagel_db:\n")
+printNormal("Loads Bagel graphs and extern nodes into the Bagel model database.\n")
+printNormal("\t "+BOLD+"usage:"+END+" add_to_bagel_db [path_to_bagel_graphs] [path_to_bagel_db] [version] [git_address] [git_hash] force")
+printNormal("\t\t "+BOLD+"path_to_bagel_graphs:"+END+" path to the bagel_control folder")
+printNormal("\t\t "+BOLD+"path_to_bagel_db:"+END+" path to the file database folder.")
+printNormal("\t\t "+BOLD+"version:"+END+" version string under wich the models are commited.")
+printNormal("\t\t "+BOLD+"git_address:"+END+" git address to checkout bagel_control folder.")
+printNormal("\t\t "+BOLD+"git_hass:"+END+" git hash pointing to commit used for the desired model version.")
+printNormal("\t\t "+BOLD+"force:"+END+" overwrite existing models, if version is already in database. Generally, this option should not be used, only if one pushes successfully a version and needs to bugfix that version.\n")
+
+printWarning("\nrecreate_info_yml:\n")
+printNormal("Parses the given bagel_db and rewrites the info.yml from the result.\n")
+printNormal("\t "+BOLD+"usage:"+END+" recreate_info_yml [path_to_bagel_db]")
+
+printWarning("\nmodel_to_bagel:\n")
+printNormal("Converts and installs the Bagel models from the database into Bagel graphs and compiles extern nodes.")
+printNormal("Note: Needs $AUTOPROJ_CURRENT_ROOT defined in environment.\n")
+printNormal("\t "+BOLD+"usage:"+END+" model_to_bagel --filedb=[optional path to file database]")
+printNormal("\t                       --modelname=[name of model to install]")
+printNormal("\t                       --version=[version to install]")
+printNormal("\t                       --skip_extern_nodes (optional / skip building of extern nodes)\n")
+
+printWarning("\ncreate_mars_config:\n")
+printNormal("Setups MARS configuration folder to load the Bagel graph into the simulation.")
+printNormal("Note: Needs $AUTOPROJ_CURRENT_ROOT defined in environment.\n")
+printNormal("\t "+BOLD+"usage:"+END+" create_mars_config --filedb=[optional path to file database]")
+printNormal("\t                           --modelname=[name of model to install]")
+printNormal("\t                           --version=[version to install]")
+printNormal("\t                           --scene=[MARS scene file to load]")
+printNormal("\t                           --marsfolder=[optional / target folder for MARS configuration]\n")
+
+printWarning("\ninit_parameters_to_graph:\n")
+printNormal("Transfers the init paramters from an existing start_paramters file each input port of the graph file")
+printNormal("Note: Needs $AUTOPROJ_CURRENT_ROOT defined in environment.\n")
+printNormal("\t "+BOLD+"usage:"+END+" init_parameters_to_graph --init_file=[path to file holding the init values]")
+printNormal("\t                                               --graph_file=[path to graph file where the init values should be set]\n\n")
+
+printWarning("\nstart_mars:\n")
+printNormal("Starts the MARS simulation for given model if the default configuration folder is installed.")
+printNormal("Note: Needs $AUTOPROJ_CURRENT_ROOT defined in environment.\n")
+printNormal("\t "+BOLD+"usage:"+END+" start_mars --modelname=[name of model]")
+printNormal("\t                   --version=[version string]\n\n")
+
+printWarning("\nget_unreferenced_models:\n")
+printNormal("List all models that are not linked within another model.")
+printNormal("Note: Either ${AUTOPROJ_CURRENT_ROOT}/bagel/bagel_db is used or the optional filedb argument.\n")
+printNormal("\t "+BOLD+"usage:"+END+" get_unreferenced_models --filedb=[path to file database]\n")
+
+printWarning("\nlist_depending_models:\n")
+printNormal("List all models that include the model defined by the arguments.")
+printNormal("Note: Either ${AUTOPROJ_CURRENT_ROOT}/bagel/bagel_db is used or the optional filedb argument.\n")
+printNormal("\t "+BOLD+"usage:"+END+" list_depending_models --filedb=[optional path to file database]")
+printNormal("\t                              --modelname=[name of model]")
+printNormal("\t                              --version=[version of model]")
+printNormal("\t                              --delete (optional / deletes model if no parent models found)\n")
+
+printWarning("\nbagel_model_info:\n")
+printNormal("List all models that include the model defined by the arguments.")
+printNormal("Note: Either ${AUTOPROJ_CURRENT_ROOT}/bagel/bagel_db is used or the optional filedb argument.\n")
+printNormal("\t "+BOLD+"usage:"+END+" bagel_model_info --filedb=[optional path to file database]")
+printNormal("\t                         --modelname=[name of model]")
+printNormal("\t                         --version=[version of model]\n")

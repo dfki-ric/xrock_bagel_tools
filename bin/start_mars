@@ -1,0 +1,67 @@
+#! /usr/bin/env python
+
+import os
+import sys
+import yaml
+
+modelsLoaded = {}
+modelsToLoad = {}
+nodeInfos = {}
+config = {}
+workspacePath = "."
+
+for arg in sys.argv:
+    arrArg = arg.split("=")
+    if len(arrArg) == 2:
+        config[arrArg[0][2:]] = arrArg[1]
+
+#the workspace path in not correctly given by the management gui
+# workspacePath = "/".join(os.getcwd().split("/")[:-3])
+# if not os.path.isfile(os.path.join(workspacePath, "generalsettings.yml")):
+#     print("Cloud not find \"generalsettings.yml\" in " + workspacePath +".")
+#     exit(-1)
+
+# if not "workspace" in config:
+#     print("No workspace argument given \"workspace='path to current dev root'\".")
+#     exit(-1)
+
+if not "modelname" in config:
+    print("No modelname argument given \"modelname='model name'\".")
+    exit(-1)
+
+if not "version" in config:
+    print("No model version argument given \"version='model version'\".")
+    exit(-1)
+
+# if not "domain" in config:
+#     print("No domain argument given \"domain='domain'\".")
+#     exit(-1)
+
+modelName = config["modelname"]
+modelVersion = config["version"]
+#modelDomain = config["domain"]
+
+# todo: store this link in the model data
+bagelName = modelName #"bagel::"+modelName
+bagelVersion = modelVersion #modelName
+devRootPath = "." # config["workspace"]
+
+if not os.path.isfile(os.path.join(devRootPath, "env.sh")):
+    print("No env.sh found in workspace path; Try to load AUTOPROJ_CURRENT_ROOT.")
+    if not 'AUTOPROJ_CURRENT_ROOT' in os.environ:
+        print("No AUTOPROJ_CURRENT_ROOT found in environment.")
+        exit(-1)
+    else:
+        devRootPath = os.environ['AUTOPROJ_CURRENT_ROOT']
+
+# 1:
+targetFolder = os.path.join(devRootPath, "install/configuration/mars/"+bagelName+"/"+bagelVersion)
+cwd = os.getcwd()
+os.chdir(targetFolder)
+os.system("./start_mars.sh")
+os.chdir(cwd)
+
+
+status = {"status": 0, "message": "closed fine"}
+with open("status.yml", "w") as f:
+    yaml.dump(status, f)

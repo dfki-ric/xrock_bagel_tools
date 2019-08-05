@@ -1,0 +1,13 @@
+<package>
+  <description brief="Command line tools to convert and deploy XRock models to Bagel graphs.">
+  </description>
+  <author>Malte Langosz/malte.langosz@dfki.de</author>
+  <maintainer>Malte Langosz/malte.langosz@dfki.de</maintainer>
+  <license>New BSD</license>
+  <url>https://git.hb.dfki.de/d-rock/bagel_mars_deploy</url>
+  <logo>none</logo>
+ 
+  <depend package="simulation/lib_manager" />
+  <depend package="simulation/configmaps" />
+  <depend package="simulation/mars/common/utils" />
+</package>

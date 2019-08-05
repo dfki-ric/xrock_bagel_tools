@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+
+${AUTOPROJ_CURRENT_ROOT}/tools/bagel_mars_deploy/python/init_parameters_to_graph.py $@
