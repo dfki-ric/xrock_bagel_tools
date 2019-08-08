@@ -172,9 +172,9 @@ marsStartFile = os.path.join(targetFolder, "start_mars.sh")
 with open(marsStartFile, "w") as f:
     f.write("#! /usr/bin/env bash\n\n")
     if len(sceneFile) > 0:
-        f.write("DYLD_LIBRARY_PATH=$MCDYLD_LIBRARY_PATH mars_app -s \""+sceneFile+"\"\n")
+        f.write("DYLD_LIBRARY_PATH=$MYLD_LIBRARY_PATH mars_app -s \""+sceneFile+"\"\n")
     else:
-        f.write("DYLD_LIBRARY_PATH=$MCDYLD_LIBRARY_PATH mars_app\n")
+        f.write("DYLD_LIBRARY_PATH=$MYLD_LIBRARY_PATH mars_app\n")
 
 cmd = "chmod +x " + marsStartFile
 os.system(cmd)
