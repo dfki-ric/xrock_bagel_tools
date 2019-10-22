@@ -462,6 +462,14 @@ int main(int argc, char **argv) {
 
   if(config.hasKey("filedb")) {
     dbPath << config["filedb"];
+    if(!pathExists((dbPath))) {
+      // try to add root dir
+      dbPath = pathJoin(rootDir, dbPath);
+      if(!pathExists((dbPath))) {
+        fprintf(stderr, "\033[31;1mERROR\033[0m: path given for filedb not found!\n");
+        exit(-1);
+      }
+    }
   }
   else {
     dbPath = pathJoin(rootDir, "bagel/bagel_db");
